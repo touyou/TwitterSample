@@ -29,7 +29,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         // これが一つ一つのセル、Twitter API側に用意されている
         prototypeCell = TWTRTweetTableViewCell(style: .Default, reuseIdentifier: "cell")
         
-        tableView.registerClass(TWTRTweetTableViewCell.self, forHeaderFooterViewReuseIdentifier: "cell")
+        tableView.registerClass(TWTRTweetTableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
         loadTweets()
