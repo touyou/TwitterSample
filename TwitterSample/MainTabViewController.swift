@@ -1,31 +1,22 @@
 //
-//  LoginViewController.swift
+//  MainTabViewController.swift
 //  TwitterSample
 //
-//  Created by 藤井陽介 on 2016/02/13.
+//  Created by 藤井陽介 on 2016/02/14.
 //  Copyright © 2016年 touyou. All rights reserved.
 //
 
 import UIKit
-import TwitterKit
 
-class LoginViewController: UIViewController {
+class MainTabViewController: UITabBarController {
+    
+    var timelineView: TimelineViewController!
+    var retweetView: RetweetViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let loginButton = TWTRLogInButton(logInCompletion: {
-            session, error in
-            if session != nil {
-                print(session!.userName)
-                UIApplication.sharedApplication().keyWindow?.rootViewController = MainTabViewController()
-            } else {
-                print(error!.localizedDescription)
-            }
-        })
-        loginButton.center = self.view.center
-        self.view.addSubview(loginButton)
     }
 
     override func didReceiveMemoryWarning() {

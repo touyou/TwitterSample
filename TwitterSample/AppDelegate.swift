@@ -19,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Twitter.self])
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        // すでにログインしていたらそのまま、していなかったらログインへ
+        if let _ = Twitter.sharedInstance().session()?.userName {
+            self.window?.rootViewController = MainTabViewController()
+        } else {
+            self.window?.rootViewController = LoginViewController()
+        }
         return true
     }
 
