@@ -1,5 +1,5 @@
 //
-//  MainTabViewController.swift
+//  TweetViewController.swift
 //  TwitterSample
 //
 //  Created by 藤井陽介 on 2016/02/14.
@@ -8,23 +8,12 @@
 
 import UIKit
 
-class MainTabViewController: UITabBarController {
-    
-    var timelineView: TimelineViewController!
-    var replyView: ReplyViewController!
+class TweetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        timelineView = TimelineViewController()
-        replyView = ReplyViewController()
-        timelineView.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(), selectedImage: UIImage())
-        replyView.tabBarItem = UITabBarItem(title: "リプライ", image: UIImage(), selectedImage: UIImage())
-        
-        var timelineNavigationController = UINavigationController(rootViewController: timelineView)
-        var replyNavigationController = UINavigationController(rootViewController: replyView)
-        self.setViewControllers([timelineNavigationController, replyNavigationController], animated: false)
     }
 
     override func didReceiveMemoryWarning() {

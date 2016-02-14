@@ -8,12 +8,13 @@
 
 import UIKit
 
-class RetweetViewController: UIViewController {
+class ReplyViewController: BaseTweetViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.title = "リプライ"
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,8 +8,9 @@
 
 import UIKit
 import TwitterKit
+import Foundation
 
-class TimelineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TimelineViewController:BaseTweetViewController, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
     var tweets: [TWTRTweet] = [] {
@@ -23,6 +24,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.title = "タイムライン"
         tableView = UITableView(frame: self.view.bounds)
         tableView.delegate = self
         tableView.dataSource = self
