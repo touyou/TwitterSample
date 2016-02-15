@@ -11,11 +11,14 @@ import UIKit
 import TwitterKit
 
 // 両方に共通するViewController、これを継承して２つのViewを作成する
-class BaseTweetViewController: UIViewController {
+class BaseTweetViewController: UIViewController, TWTRTweetViewDelegate {
     
     var tableView: UITableView!
     var tweets: [TWTRTweet] = []
     var prototypeCell: TWTRTweetTableViewCell?
+    var refreshControl: UIRefreshControl!
+    // responseからmax_idを取り出すらしいけどやり方わからぬ
+    var maxIdStr: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,12 @@ class BaseTweetViewController: UIViewController {
         tableView.registerClass(TWTRTweetTableViewCell.self, forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
+        // 引っ張ってロードするやつ
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "loading...")
+        refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
+        
         // ナビゲーションバーに置くボタン
         let tweetBtn:UIButton = UIButton(type: .Custom)
         tweetBtn.addTarget(self, action: "onClickTweet", forControlEvents: UIControlEvents.TouchUpInside)
@@ -40,11 +49,28 @@ class BaseTweetViewController: UIViewController {
         tweetBtn.setImage(UIImage(), forState: .Normal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tweetBtn)
         
-        self.load()
+        self.load({ ()->() in
+            // なにもしない
+            }, errcb: { () -> () in
+                // なにもしない
+        })
     }
     
     // for override、これを各クラスでオーバーロードするということ
-    func load() {
+    func load(cb: ()->(), errcb: ()->()) {
+    }
+    func loadMore(cb: ()->(), errcb: ()->()) {
+    }
+    
+    // refresh処理
+    func refresh() {
+        self.tweets = []
+        load({ () -> () in
+            // API通信後のsuccess callbackでrefresh Controlのローディング
+            self.refreshControl.endRefreshing()
+            }, errcb: { () -> () in
+            self.refreshControl.endRefreshing()
+        })
     }
     
     // Tweetボタンが押されたら
@@ -72,9 +98,13 @@ extension BaseTweetViewController: UITableViewDataSource {
         // cellをTWTRTweetTableViewCellにキャストする
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TWTRTweetTableViewCell
         if tweets.count > indexPath.row {
+            cell.tweetView.delegate = self
             let tweet = tweets[indexPath.row]
             cell.tag = indexPath.row
             cell.configureWithTweet(tweet)
+            if (tweets.count - 1) == indexPath.row && self.maxIdStr != "" {
+                self.loadMore({() -> () in }, errcb: {() -> () in })
+            }
         }
         return cell
     }

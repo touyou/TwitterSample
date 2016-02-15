@@ -14,6 +14,10 @@ import TwitterKit
 class TwitterAPI {
     let baseURL = "https://api.twitter.com"
     let version = "/1.1"
+    
+    var maxIdStr: String = ""
+    var sinceIdStr: String = ""
+    
 
     init() {
     }
@@ -56,6 +60,9 @@ class TwitterAPI {
                     }
                 } catch {
                 }
+                // self.maxIdStr = response["max_id"]
+                // self.sinceIdStr = response["since_id"]
+                
             } else {
                 error(err!)
             }

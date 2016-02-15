@@ -26,6 +26,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             self.window?.rootViewController = LoginViewController()
         }
+        self.window?.backgroundColor = UIColor.whiteColor()
+        self.window?.makeKeyAndVisible()
+        // 以下、色指定
+        // ナビゲーションバーの色
+        UINavigationBar.appearance().barTintColor = Constants.Theme.concept()
+        // ナビゲーションバーボタンのベースの色（設定アイコンの色など）
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        // ナビゲーションバーのタイトル文字色
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        // ナビゲーションバーの背景色
+        UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
+        // TabBarItemのアイコンの色
+        UITabBar.appearance().tintColor = Constants.Theme.concept()
+        // 画面上部のキャリアなどが表示されるステータスバーの文字色
+        // info.plistで”View controller-based status bar”をNOにセットする必要あり
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         return true
     }
 

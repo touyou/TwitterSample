@@ -17,7 +17,7 @@ class ReplyViewController: BaseTweetViewController {
         self.navigationItem.title = "リプライ"
     }
 
-    override func load() {
+    override func load(cb: () -> (), errcb: () -> ()) {
         let params = ["count": "40"]
         TwitterAPI.getMentionTimeLine(params, tweets: {
             twttrs in
@@ -30,5 +30,17 @@ class ReplyViewController: BaseTweetViewController {
                 // error handling
         })
     }
-
+    override func loadMore(cb: () -> (), errcb: () -> ()) {
+        let params = ["count": "40", "max_id": self.maxIdStr]
+        TwitterAPI.getMentionTimeLine(params, tweets: {
+            twttrs in
+            for tweet in twttrs {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+            }, error: {
+                error in
+                // error handling
+        })
+    }
 }

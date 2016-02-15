@@ -19,8 +19,21 @@ class TimelineViewController:BaseTweetViewController {
         self.navigationItem.title = "タイムライン"
     }
     
-    override func load() {
+    override func load(cb: () -> (), errcb: () -> ()) {
         let params = ["count": "40"]
+        TwitterAPI.getHomeTimeLine(params, tweets: {
+            twttrs in
+            for tweet in twttrs {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+            }, error: {
+                error in
+                // error handling
+        })
+    }
+    override func loadMore(cb: () -> (), errcb: () -> ()) {
+        let params = ["count": "40", "max_id": self.maxIdStr]
         TwitterAPI.getHomeTimeLine(params, tweets: {
             twttrs in
             for tweet in twttrs {

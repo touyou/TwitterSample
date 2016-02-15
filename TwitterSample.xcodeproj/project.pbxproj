@@ -25,6 +25,7 @@
 		468382101C706A1D001DC810 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683820F1C706A1D001DC810 /* ReplyViewController.swift */; };
 		468382121C706D10001DC810 /* BaseTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468382111C706D10001DC810 /* BaseTweetViewController.swift */; };
 		468382141C706F63001DC810 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468382131C706F63001DC810 /* TweetViewController.swift */; };
+		4683822C1C721E25001DC810 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683822B1C721E25001DC810 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		4683820F1C706A1D001DC810 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		468382111C706D10001DC810 /* BaseTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTweetViewController.swift; sourceTree = "<group>"; };
 		468382131C706F63001DC810 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		4683822B1C721E25001DC810 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				4683820F1C706A1D001DC810 /* ReplyViewController.swift */,
 				468382111C706D10001DC810 /* BaseTweetViewController.swift */,
 				468382131C706F63001DC810 /* TweetViewController.swift */,
+				4683822B1C721E25001DC810 /* Constants.swift */,
 			);
 			path = TwitterSample;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				468382141C706F63001DC810 /* TweetViewController.swift in Sources */,
 				468381C71C6F5876001DC810 /* LoginViewController.swift in Sources */,
 				468382121C706D10001DC810 /* BaseTweetViewController.swift in Sources */,
+				4683822C1C721E25001DC810 /* Constants.swift in Sources */,
 				468381C91C6F5A05001DC810 /* TimelineViewController.swift in Sources */,
 				468381CB1C6F5A1C001DC810 /* TwitterAPI.swift in Sources */,
 				468381901C6F4DFA001DC810 /* AppDelegate.swift in Sources */,
