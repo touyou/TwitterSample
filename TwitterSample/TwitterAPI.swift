@@ -19,25 +19,31 @@ class TwitterAPI {
     }
     
     // Swift2でエラーが出ないようにいじった
+    // paramsに色々渡すらしい
+    // 極限まで関数わける
     // 普通のタイムライン
-    class func getHomeTimeLine(tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        getAnyStatus(tweets, error: error, path: "/statuses/home_timeline.json")
+    class func getHomeTimeLine(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        getAnyStatus(params, tweets: tweets, error: error, path: "/statuses/home_timeline.json")
     }
     // 自分に対するメンションのタイムライン
-    class func getMentionTimeLine(tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        getAnyStatus(tweets, error: error, path: "/statuses/mention_timeline.json")
+    class func getMentionTimeLine(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        getAnyStatus(params, tweets: tweets, error: error, path: "/statuses/mention_timeline.json")
     }
     // 自分のリツイートされた通知
-    class func getRetweetTimeLine(tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        getAnyStatus(tweets, error: error, path: "statuses/retweets_of_me.json")
+    class func getRetweetTimeLine(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        getAnyStatus(params, tweets: tweets, error: error, path: "statuses/retweets_of_me.json")
+    }
+    // お気に入りリスト
+    class func getMyFavorites(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        getAnyStatus(params, tweets: tweets, error: error, path: "/favorites/list.json")
     }
     
     // TimeLine一般を取得する
-    class func getAnyStatus(tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
+    class func getAnyStatus(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
         let api = TwitterAPI()
         var clientError: NSError?
         let endpoint = api.baseURL + api.version + path
-        let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("GET", URL: endpoint, parameters: nil, error: &clientError)
+        let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("GET", URL: endpoint, parameters: params, error: &clientError)
         
         Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: {
             response, data, err in
@@ -57,11 +63,11 @@ class TwitterAPI {
 
     }
     // POSTアクションはこっち
-    class func postAnyStatus(tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
+    class func postAnyStatus(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
         let api = TwitterAPI()
         var clientError: NSError?
         let endpoint = api.baseURL + api.version + path
-        let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("POST", URL: endpoint, parameters: nil, error: &clientError)
+        let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("POST", URL: endpoint, parameters: params, error: &clientError)
         Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: {
             response, data, err in
             if err == nil {
@@ -79,5 +85,36 @@ class TwitterAPI {
         })
 
     }
-    
+    // もうひとつの呼び出し方？
+//    class func search(params: [NSObject : AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError) -> ()) {
+//        self.callAPI("/search/tweets.json", parameters: params, completion: {
+//            response, data, err in
+//            if err == nil {
+//                do {
+//                    let json: AnyObject? =  try NSJSONSerialization.JSONObjectWithData(data!,
+//                    options: NSJSONReadingOptions.MutableContainers)
+//                    if let top = json as? NSDictionary {
+//                        var list: [TWTRTweet] = []
+//                        if let statuses = top["statuses"] as? NSArray {
+//                            list = TWTRTweet.tweetsWithJSONArray(statuses as [AnyObject]) as! [TWTRTweet]
+//                        }
+//                        tweets(list)
+//                    }
+//                } catch {
+//                }
+//            } else {
+//                error(err!)
+//            }
+//        })
+//    }
+//    class func callAPI(path: String, parameters: [NSObject: AnyObject]!, completion: TWTRNetworkCompletion!) {
+//        self._callAPI(path, method: "GET", parameters: parameters, completion: completion)
+//    }
+//    class func _callAPI(path: String, method: String, parameters: [NSObject: AnyObject]!, completion: TWTRNetworkCompletion!) {
+//        let api = TwitterAPI()
+//        var clientError: NSError?
+//        let endpoint = api.baseURL + api.version + path
+//        let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod(method, URL: endpoint, parameters: parameters, error: &clientError)
+//        Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: completion)
+//    }
 }
