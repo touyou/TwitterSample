@@ -27,7 +27,7 @@ class TwitterAPI {
     }
     // 自分に対するメンションのタイムライン
     class func getMentionTimeLine(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        getAnyStatus(params, tweets: tweets, error: error, path: "/statuses/mention_timeline.json")
+        getAnyStatus(params, tweets: tweets, error: error, path: "/statuses/mentions_timeline.json")
     }
     // 自分のリツイートされた通知
     class func getRetweetTimeLine(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {

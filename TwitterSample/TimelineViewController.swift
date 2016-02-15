@@ -10,72 +10,26 @@ import UIKit
 import TwitterKit
 import Foundation
 
-class TimelineViewController:BaseTweetViewController, UITableViewDataSource, UITableViewDelegate {
+class TimelineViewController:BaseTweetViewController {
     
-    var tableView: UITableView!
-    var tweets: [TWTRTweet] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    var prototypeCell: TWTRTweetTableViewCell?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.title = "タイムライン"
-        tableView = UITableView(frame: self.view.bounds)
-        tableView.delegate = self
-        tableView.dataSource = self
-        // これが一つ一つのセル、Twitter API側に用意されている
-        prototypeCell = TWTRTweetTableViewCell(style: .Default, reuseIdentifier: "cell")
-        
-        tableView.registerClass(TWTRTweetTableViewCell.self, forCellReuseIdentifier: "cell")
-        self.view.addSubview(tableView)
-        
-        loadTweets()
     }
     
-    // これでTLをロードする、これにボタンとかつけたらスライド更新とかできそう
-    func loadTweets() {
-        TwitterAPI.getHomeTimeLine({
+    override func load() {
+        let params = ["count": "40"]
+        TwitterAPI.getHomeTimeLine(params, tweets: {
             twttrs in
             for tweet in twttrs {
                 self.tweets.append(tweet)
             }
+            self.tableView.reloadData()
             }, error: {
                 error in
-                print(error.localizedDescription)
+                // error handling
         })
-    }
-
-    // MARK: UITableViewDataSource
-    // 取得したTweetの数だけTableViewのセルをつくる
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tweets.count
-    }
-    // セルの内容を返す
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TWTRTweetTableViewCell
-        
-        let tweet = tweets[indexPath.row]
-        cell.configureWithTweet(tweet)
-        
-        return cell
-    }
-    
-    // MARK: UITableViewDelegate
-    // セルの大きさを決める
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let tweet = tweets[indexPath.row]
-        
-        prototypeCell?.configureWithTweet(tweet)
-        
-        if let height = prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {
-            return height
-        } else {
-            return tableView.estimatedRowHeight
-        }
     }
 }

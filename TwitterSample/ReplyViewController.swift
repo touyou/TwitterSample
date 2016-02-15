@@ -17,20 +17,18 @@ class ReplyViewController: BaseTweetViewController {
         self.navigationItem.title = "リプライ"
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func load() {
+        let params = ["count": "40"]
+        TwitterAPI.getMentionTimeLine(params, tweets: {
+            twttrs in
+            for tweet in twttrs {
+                self.tweets.append(tweet)
+            }
+            self.tableView.reloadData()
+            }, error: {
+                error in
+                // error handling
+        })
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
