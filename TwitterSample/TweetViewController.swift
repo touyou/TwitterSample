@@ -7,24 +7,32 @@
 //
 
 import UIKit
+import Foundation
+import TwitterKit
 
 class TweetViewController: UIViewController {
 
-    var toolBar: UIToolbar = UIToolbar()
-    var backButton: UIBarButtonItem!
-    var tweetTextEdit: UITextField!
-    var toolBarHeight: CGFloat = 50.0
+    @IBOutlet var tweetTextEdit: UITextView!
+    @IBOutlet var tweetButton: UIButton!
     
     // ひとつだけストーリーボード実装しにくいから手書きで
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let selfFrame: CGRect = self.view.frame
-        self.toolBar.frame = CGRect(x: 0, y: selfFrame.size.height - toolBarHeight, width: selfFrame.size.width, height: toolBarHeight)
-        self.toolBar.backgroundColor = Constants.Theme.concept()
-        self.toolBar.tintColor = Constants.Theme.concept()
-        self.view.addSubview(self.toolBar)
+        // タイトルのセットと背景色の指定
+        self.view.backgroundColor = UIColor.whiteColor()
+        tweetTextEdit.text = ""
+        
+        tweetButton.layer.cornerRadius = 8
+        
     }
-    // TO-DO: テキストフィールドとツイートボタンとTweetViewをおわらせるボタンの配置
+    @IBAction func onClickClose() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func onClickTweet() {
+        let params = ["statuses": tweetTextEdit.text!]
+        TwitterAPI.postTweet(params, tweets: {twttrs in }, error: {error in })
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

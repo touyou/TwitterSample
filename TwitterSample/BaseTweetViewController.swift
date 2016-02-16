@@ -75,8 +75,9 @@ class BaseTweetViewController: UIViewController {
     
     // Tweetボタンが押されたら
     func onClickTweet() {
-        let tweetViewCtrl = TweetViewController()
-        let modalView = UINavigationController(rootViewController: tweetViewCtrl)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let tweetViewCtrl = mainStoryboard.instantiateInitialViewController()
+        let modalView = UINavigationController(rootViewController: tweetViewCtrl!)
         modalView.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
         self.presentViewController(modalView, animated: true, completion: nil)
     }
