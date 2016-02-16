@@ -11,7 +11,7 @@ import UIKit
 import TwitterKit
 
 // 両方に共通するViewController、これを継承して２つのViewを作成する
-class BaseTweetViewController: UIViewController, TWTRTweetViewDelegate {
+class BaseTweetViewController: UIViewController {
     
     var tableView: UITableView!
     var tweets: [TWTRTweet] = []
@@ -112,6 +112,8 @@ extension BaseTweetViewController: UITableViewDataSource {
 
 // UITableViewDelegateを実装する
 extension BaseTweetViewController : UITableViewDelegate {
+    
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let tweet = tweets[indexPath.row]
         if tweets.count > indexPath.row {
@@ -125,5 +127,33 @@ extension BaseTweetViewController : UITableViewDelegate {
         //        } else {
         //            return tableView.estimatedRowHeight
         //        }
+    }
+}
+
+// TWTRTweetViewDelegateを実装
+extension BaseTweetViewController: TWTRTweetViewDelegate {
+    // tap a cell
+    func tweetView(tweetView: TWTRTweetView, didSelectTweet tweet: TWTRTweet) {
+        var url: String = ""
+        // URLTweetにcastしてurlをとりだす
+        if let urlTweet = tweet as? URLTweet {
+            url = urlTweet.url
+        }
+        if url == "" {
+            return
+        }
+        self.openWebView(NSURL(string: url)!)
+    }
+    
+    // tap a link in cell
+    func tweetView(tweetView: TWTRTweetView, didTapURL url: NSURL) {
+        self.openWebView(url)
+    }
+    
+    func openWebView(url: NSURL) {
+        let webviewController = StockWebViewController()
+        webviewController.url = url
+        // webviewController.hideBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(webviewController, animated: true)
     }
 }

@@ -18,9 +18,9 @@ class Constants {
     }
     
     struct Theme {
-        // my app concept color is #d9e5ff
+        // my app concept color is #00cccc
         static func concept() -> UIColor {
-            return UIColor(red: 217.0, green: 229.0, blue: 255, alpha: 1.0)
+            return UIColor(red: 0.0, green: 204.0, blue: 204.0, alpha: 1.0)
         }
     }
 }

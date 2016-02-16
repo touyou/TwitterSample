@@ -26,6 +26,7 @@ class TimelineViewController:BaseTweetViewController {
             for tweet in twttrs {
                 self.tweets.append(tweet)
             }
+            self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()
             }, error: {
                 error in
@@ -39,6 +40,7 @@ class TimelineViewController:BaseTweetViewController {
             for tweet in twttrs {
                 self.tweets.append(tweet)
             }
+            self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()
             }, error: {
                 error in

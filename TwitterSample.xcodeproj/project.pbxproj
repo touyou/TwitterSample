@@ -26,6 +26,8 @@
 		468382121C706D10001DC810 /* BaseTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468382111C706D10001DC810 /* BaseTweetViewController.swift */; };
 		468382141C706F63001DC810 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468382131C706F63001DC810 /* TweetViewController.swift */; };
 		4683822C1C721E25001DC810 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683822B1C721E25001DC810 /* Constants.swift */; };
+		4683822E1C7350DA001DC810 /* StockWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683822D1C7350DA001DC810 /* StockWebViewController.swift */; };
+		468382301C735275001DC810 /* URLTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4683822F1C735275001DC810 /* URLTweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		468382111C706D10001DC810 /* BaseTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTweetViewController.swift; sourceTree = "<group>"; };
 		468382131C706F63001DC810 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		4683822B1C721E25001DC810 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4683822D1C7350DA001DC810 /* StockWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockWebViewController.swift; sourceTree = "<group>"; };
+		4683822F1C735275001DC810 /* URLTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTweet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,8 @@
 				468382111C706D10001DC810 /* BaseTweetViewController.swift */,
 				468382131C706F63001DC810 /* TweetViewController.swift */,
 				4683822B1C721E25001DC810 /* Constants.swift */,
+				4683822D1C7350DA001DC810 /* StockWebViewController.swift */,
+				4683822F1C735275001DC810 /* URLTweet.swift */,
 			);
 			path = TwitterSample;
 			sourceTree = "<group>";
@@ -321,8 +327,10 @@
 				468382141C706F63001DC810 /* TweetViewController.swift in Sources */,
 				468381C71C6F5876001DC810 /* LoginViewController.swift in Sources */,
 				468382121C706D10001DC810 /* BaseTweetViewController.swift in Sources */,
+				468382301C735275001DC810 /* URLTweet.swift in Sources */,
 				4683822C1C721E25001DC810 /* Constants.swift in Sources */,
 				468381C91C6F5A05001DC810 /* TimelineViewController.swift in Sources */,
+				4683822E1C7350DA001DC810 /* StockWebViewController.swift in Sources */,
 				468381CB1C6F5A1C001DC810 /* TwitterAPI.swift in Sources */,
 				468381901C6F4DFA001DC810 /* AppDelegate.swift in Sources */,
 				4683820E1C7069DA001DC810 /* MainTabViewController.swift in Sources */,

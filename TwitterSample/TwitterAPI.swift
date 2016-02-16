@@ -41,6 +41,18 @@ class TwitterAPI {
     class func getMyFavorites(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
         getAnyStatus(params, tweets: tweets, error: error, path: "/favorites/list.json")
     }
+    // Tweet
+    class func postTweet(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/update.json")
+    }
+    // Tweet with Media
+    class func postMediaTweet(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
+        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/update_with_media.json")
+    }
+    // Delete
+    class func postDelete(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), id: String) {
+        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/destroy/:" + id + ".json")
+    }
     
     // TimeLine一般を取得する
     class func getAnyStatus(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
@@ -56,13 +68,10 @@ class TwitterAPI {
                     let json: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!,
                         options: NSJSONReadingOptions.MutableContainers)
                     if let jsonArray = json as? NSArray {
-                        tweets(TWTRTweet.tweetsWithJSONArray(jsonArray as [AnyObject]) as! [TWTRTweet])
+                        tweets(URLTweet.tweetsWithJSONArray(jsonArray as [AnyObject]) as! [TWTRTweet])
                     }
                 } catch {
                 }
-                // self.maxIdStr = response["max_id"]
-                // self.sinceIdStr = response["since_id"]
-                
             } else {
                 error(err!)
             }
@@ -82,7 +91,7 @@ class TwitterAPI {
                     let json: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!,
                         options: NSJSONReadingOptions.MutableContainers)
                     if let jsonArray = json as? NSArray {
-                        tweets(TWTRTweet.tweetsWithJSONArray(jsonArray as [AnyObject]) as! [TWTRTweet])
+                        tweets(URLTweet.tweetsWithJSONArray(jsonArray as [AnyObject]) as! [TWTRTweet])
                     }
                 } catch {
                 }
