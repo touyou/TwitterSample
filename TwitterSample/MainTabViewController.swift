@@ -19,11 +19,11 @@ class MainTabViewController: UITabBarController {
         // Do any additional setup after loading the view.
         timelineView = TimelineViewController()
         replyView = ReplyViewController()
-        timelineView.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(), selectedImage: UIImage())
-        replyView.tabBarItem = UITabBarItem(title: "リプライ", image: UIImage(), selectedImage: UIImage())
+        timelineView.tabBarItem = UITabBarItem(title: "タイムライン", image: UIImage(named: "timeline"), selectedImage: UIImage(named: "timeline"))
+        replyView.tabBarItem = UITabBarItem(title: "リプライ", image: UIImage(named: "reply"), selectedImage: UIImage(named: "reply"))
         
-        var timelineNavigationController = UINavigationController(rootViewController: timelineView)
-        var replyNavigationController = UINavigationController(rootViewController: replyView)
+        let timelineNavigationController = UINavigationController(rootViewController: timelineView)
+        let replyNavigationController = UINavigationController(rootViewController: replyView)
         self.setViewControllers([timelineNavigationController, replyNavigationController], animated: false)
     }
 

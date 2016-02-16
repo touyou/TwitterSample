@@ -21,8 +21,8 @@ class ReplyViewController: BaseTweetViewController {
         let params = ["count": "40"]
         TwitterAPI.getMentionTimeLine(params, tweets: {
             twttrs in
-            for tweet in twttrs {
-                self.tweets.append(tweet)
+            for var i = 0; i < twttrs.count-1; i++ {
+                self.tweets.append(twttrs[i])
             }
             self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()
@@ -35,8 +35,8 @@ class ReplyViewController: BaseTweetViewController {
         let params = ["count": "40", "max_id": self.maxIdStr]
         TwitterAPI.getMentionTimeLine(params, tweets: {
             twttrs in
-            for tweet in twttrs {
-                self.tweets.append(tweet)
+            for var i = 0; i < twttrs.count-1; i++ {
+                self.tweets.append(twttrs[i])
             }
             self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()

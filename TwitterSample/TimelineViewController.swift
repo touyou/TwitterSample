@@ -18,13 +18,13 @@ class TimelineViewController:BaseTweetViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.title = "タイムライン"
     }
-    
+    // max_idの管理が微妙なので余分に一個とっておいてそれをmaxIdStrに保存しておき次にはそこから読み込むようにする
     override func load(cb: () -> (), errcb: () -> ()) {
-        let params = ["count": "40"]
+        let params = ["count": "41"]
         TwitterAPI.getHomeTimeLine(params, tweets: {
             twttrs in
-            for tweet in twttrs {
-                self.tweets.append(tweet)
+            for var i = 0; i < twttrs.count-1; i++ {
+                self.tweets.append(twttrs[i])
             }
             self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()
@@ -34,11 +34,11 @@ class TimelineViewController:BaseTweetViewController {
         })
     }
     override func loadMore(cb: () -> (), errcb: () -> ()) {
-        let params = ["count": "40", "max_id": self.maxIdStr]
+        let params = ["count": "41", "max_id": self.maxIdStr]
         TwitterAPI.getHomeTimeLine(params, tweets: {
             twttrs in
-            for tweet in twttrs {
-                self.tweets.append(tweet)
+            for var i = 0; i < twttrs.count-1; i++ {
+                self.tweets.append(twttrs[i])
             }
             self.maxIdStr = twttrs[twttrs.count - 1].tweetID
             self.tableView.reloadData()

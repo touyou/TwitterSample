@@ -46,7 +46,7 @@ class BaseTweetViewController: UIViewController {
         let tweetBtn:UIButton = UIButton(type: .Custom)
         tweetBtn.addTarget(self, action: "onClickTweet", forControlEvents: UIControlEvents.TouchUpInside)
         tweetBtn.frame = CGRectMake(0, 0, 24, 24)
-        tweetBtn.setImage(UIImage(), forState: .Normal)
+        tweetBtn.setImage(UIImage(named: "tweet"), forState: .Normal)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: tweetBtn)
         
         self.load({ ()->() in
@@ -101,6 +101,7 @@ extension BaseTweetViewController: UITableViewDataSource {
             cell.tweetView.delegate = self
             let tweet = tweets[indexPath.row]
             cell.tag = indexPath.row
+            // これでアクションボタン表示可能だけどデフォルトのアクションボタン結構扱いにくい
             cell.tweetView.showActionButtons = true
             cell.configureWithTweet(tweet)
             if (tweets.count - 1) == indexPath.row && self.maxIdStr != "" {
@@ -120,7 +121,7 @@ extension BaseTweetViewController : UITableViewDelegate {
         if tweets.count > indexPath.row {
             prototypeCell?.configureWithTweet(tweet)
         }
-        // fabric 1.1以降は以下のクラスfuncでheightが取得できる
+        // fabric 1.1以降は以下のクラスfuncでheightが取得できる(showingActionsオプションでActionボタンのあるなしかわる)
         return TWTRTweetTableViewCell.heightForTweet(tweet, width: self.view.bounds.width, showingActions: true)
         // fabric 1.1より前のバージョンでは以下を使う
         //        if let height = prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {

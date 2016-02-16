@@ -10,26 +10,21 @@ import UIKit
 
 class TweetViewController: UIViewController {
 
+    var toolBar: UIToolbar = UIToolbar()
+    var backButton: UIBarButtonItem!
+    var tweetTextEdit: UITextField!
+    var toolBarHeight: CGFloat = 50.0
+    
+    // ひとつだけストーリーボード実装しにくいから手書きで
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let selfFrame: CGRect = self.view.frame
+        self.toolBar.frame = CGRect(x: 0, y: selfFrame.size.height - toolBarHeight, width: selfFrame.size.width, height: toolBarHeight)
+        self.toolBar.backgroundColor = Constants.Theme.concept()
+        self.toolBar.tintColor = Constants.Theme.concept()
+        self.view.addSubview(self.toolBar)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // TO-DO: テキストフィールドとツイートボタンとTweetViewをおわらせるボタンの配置
 }
