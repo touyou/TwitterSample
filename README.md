@@ -10,3 +10,12 @@ Fabricを利用したTwitterクライアントサンプル、一通りやりた�
 - [公式ドキュメント](https://docs.fabric.io/ios)…何故かそのままだとエラーでるコードがのってる謎
 - [Fabric入門記事](http://dev.classmethod.jp/series/fabric-入門/)…Objective-Cなのが△
 - [Qiitaにあった記事](http://qiita.com/mokumoku/items/bf0460f420acac3c04fc)…とりあえずTLを表示するには一番しっかりしてる
+
+## 機能  
+- TLの表示
+- リプライの表示
+- アカウント切り替えはまだ
+- ツイート編集画面も実装途中
+- Fabric純正のTweetCellViewを使っているけどいいねなどのアクションボタンの仕様が普通のクライアントとかけ離れているので△
+- idまわりの実装はわりと無理矢理
+- ！ツイート画面まで実装しツイートできることが確認できたら画像APIのプロトタイプ作成に移行する
