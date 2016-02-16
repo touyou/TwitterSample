@@ -101,6 +101,7 @@ extension BaseTweetViewController: UITableViewDataSource {
             cell.tweetView.delegate = self
             let tweet = tweets[indexPath.row]
             cell.tag = indexPath.row
+            cell.tweetView.showActionButtons = true
             cell.configureWithTweet(tweet)
             if (tweets.count - 1) == indexPath.row && self.maxIdStr != "" {
                 self.loadMore({() -> () in }, errcb: {() -> () in })
@@ -120,7 +121,7 @@ extension BaseTweetViewController : UITableViewDelegate {
             prototypeCell?.configureWithTweet(tweet)
         }
         // fabric 1.1以降は以下のクラスfuncでheightが取得できる
-        return TWTRTweetTableViewCell.heightForTweet(tweet, width: self.view.bounds.width)
+        return TWTRTweetTableViewCell.heightForTweet(tweet, width: self.view.bounds.width, showingActions: true)
         // fabric 1.1より前のバージョンでは以下を使う
         //        if let height = prototypeCell?.calculatedHeightForWidth(self.view.bounds.width) {
         //            return height
