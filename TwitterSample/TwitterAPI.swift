@@ -42,16 +42,16 @@ class TwitterAPI {
         getAnyStatus(params, tweets: tweets, error: error, path: "/favorites/list.json")
     }
     // Tweet
-    class func postTweet(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/update.json")
+    class func postTweet(params: [NSObject: AnyObject]!, error: (NSError)->()) {
+        postAnyStatus(params, error: error, path: "/statuses/update.json")
     }
     // Tweet with Media
-    class func postMediaTweet(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->()) {
-        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/update_with_media.json")
+    class func postMediaTweet(params: [NSObject: AnyObject]!, error: (NSError)->()) {
+        postAnyStatus(params, error: error, path: "/statuses/update_with_media.json")
     }
     // Delete
     class func postDelete(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), id: String) {
-        postAnyStatus(params, tweets: tweets, error: error, path: "/statuses/destroy/:" + id + ".json")
+        postAnyStatus(params, error: error, path: "/statuses/destroy/:" + id + ".json")
     }
     
     // TimeLine一般を取得する
@@ -79,23 +79,19 @@ class TwitterAPI {
 
     }
     // POSTアクションはこっち
-    class func postAnyStatus(params: [NSObject: AnyObject]!, tweets: [TWTRTweet]->(), error: (NSError)->(), path: String) {
+    class func postAnyStatus(params: [NSObject: AnyObject]!, error: (NSError)->(), path: String) {
         let api = TwitterAPI()
         var clientError: NSError?
         let endpoint = api.baseURL + api.version + path
         let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("POST", URL: endpoint, parameters: params, error: &clientError)
+        print(request)
+        print(params)
         Twitter.sharedInstance().APIClient.sendTwitterRequest(request, completion: {
             response, data, err in
             if err == nil {
-                do {
-                    let json: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data!,
-                        options: NSJSONReadingOptions.MutableContainers)
-                    if let jsonArray = json as? NSArray {
-                        tweets(URLTweet.tweetsWithJSONArray(jsonArray as [AnyObject]) as! [TWTRTweet])
-                    }
-                } catch {
-                }
+                print("done")
             } else {
+                print("error")
                 error(err!)
             }
         })

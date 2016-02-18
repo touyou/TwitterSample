@@ -21,7 +21,7 @@ class TweetViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         // タイトルのセットと背景色の指定
-        self.view.backgroundColor = UIColor.whiteColor()
+        // self.view.backgroundColor = UIColor.whiteColor()
         tweetTextEdit.text = ""
         
         tweetButton.layer.cornerRadius = 8
@@ -31,8 +31,19 @@ class TweetViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func onClickTweet() {
+        if tweetTextEdit.text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 140 {
+            simpleAlert("140字以内で書いてください")
+            return
+        }
         let params = ["statuses": tweetTextEdit.text!]
-        TwitterAPI.postTweet(params, tweets: {twttrs in }, error: {error in })
+        TwitterAPI.postTweet(params, error: {error in })
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    // 単純なアラートをつくる関数
+    func simpleAlert(titleString: String) {
+        let alertController = UIAlertController(title: titleString, message: nil, preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(defaultAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
 }
